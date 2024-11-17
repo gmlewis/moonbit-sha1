@@ -111,9 +111,8 @@ let golden : Array[SHA1Test] = [
 test "check_sum works properly" {
   for tt in golden {
     let digest = @sha1.Digest::new()
-    for b in tt.s {
-      digest.write(b)
-    }
+    let b = @io.Slice::new(tt.s.to_array())
+    guard let (_, None) = digest.write(b)
     let got = digest.check_sum()
     assert_eq!(got, tt.out)
   }

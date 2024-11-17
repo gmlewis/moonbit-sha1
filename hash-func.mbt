@@ -1,6 +1,0 @@
-/// `HashFunc` represents a hash algorithm like `@crc32`, `@md5`, `@sha1`, or `@sha256`.
-pub(open) trait HashFunc {
-  name(Self) -> String
-  write(Self, Byte) -> Unit
-  check_sum(Self) -> String
-}

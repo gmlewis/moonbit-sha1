@@ -29,9 +29,6 @@ struct Digest {
   x : FixedArray[Byte] // chunk
   mut nx : Int
   mut len : UInt64
-  // workaround to get rid of compiler warning:
-  // See: https://discord.com/channels/1135479745207869510/1272985768498958387/1275082247484997693
-  name : String
 }
 
 /// `Digest::new` returns a new, reset Digest, ready to sum.
@@ -41,15 +38,7 @@ pub fn Digest::new() -> Digest {
     x: FixedArray::make(chunk, b'\x00'),
     nx: 0,
     len: 0,
-    // workaround to get rid of compiler warning:
-    name: "sha1",
   }
-}
-
-let _interface : HashFunc = Digest::new()
-
-pub fn name(self : Digest) -> String {
-  self.name
 }
 
 /// `check_sum` returns the final sha1sum as a hex string.
@@ -78,7 +67,7 @@ fn sum(self : Digest) -> FixedArray[Byte] {
   let len = self.len << 3
   be_put_uint64(tmp, t, len) // append length in bits
   for i = 0; i < t + 8; i = i + 1 {
-    self.write(tmp[i])
+    self.write_byte(tmp[i])
   }
 
   // The previous write ensures that a whole number of
@@ -108,8 +97,18 @@ pub fn reset(self : Digest) -> Unit {
   self.len = 0
 }
 
-/// `write` writes a byte to the digest.
-pub fn write(self : Digest, b : Byte) -> Unit {
+let _trait : @io.Writer = Digest::new()
+
+/// `write` writes a slice of bytes to the digest.
+pub fn write(self : Digest, buf : @io.Slice[Byte]) -> (Int, @io.IOError?) {
+  for b in buf {
+    self.write_byte(b)
+  }
+  (buf.length(), None)
+}
+
+/// `write_byte` writes a byte to the digest.
+pub fn write_byte(self : Digest, b : Byte) -> Unit {
   self.len += 1
   self.x[self.nx] = b
   self.nx += 1
