@@ -1,15 +1,15 @@
-/// This package is based on the Go implementation found here:
+///| This package is based on the Go implementation found here:
 /// https://cs.opensource.google/go/go/+/refs/tags/go1.23.0:src/crypto/sha1/sha1_test.go
 /// which has the copyright notice:
 /// Copyright 2009 The Go Authors. All rights reserved.
 /// Use of this source code is governed by a BSD-style
 /// license that can be found in the LICENSE file.
-
 struct SHA1Test {
   out : String
   s : Bytes
 }
 
+///|
 let golden : Array[SHA1Test] = [
   {
     out: "76245dbf96f661bd221046197ab8b9f063f11bad",
