@@ -105,7 +105,7 @@ pub fn reset(self : Digest) -> Unit {
 }
 
 ///|
-let _trait : @io.Writer = Digest::new()
+let _trait : &@io.Writer = Digest::new()
 
 ///| `write` writes a slice of bytes to the digest.
 pub fn write(self : Digest, buf : @io.Slice[Byte]) -> (Int, @io.IOError?) {
