@@ -1,0 +1,20 @@
+package gmlewis/sha1
+
+alias @gmlewis/io as @io
+
+// Values
+
+// Types and methods
+type Digest
+impl Digest {
+  check_sum(Self) -> String
+  new() -> Self
+  reset(Self) -> Unit
+  write(Self, @io.Slice[Byte]) -> (Int, @io.IOError?)
+  write_byte(Self, Byte) -> Unit
+}
+
+// Type aliases
+
+// Traits
+

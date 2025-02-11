@@ -108,6 +108,7 @@ let golden : Array[SHA1Test] = [
   },
 ]
 
+///|
 test "check_sum works properly" {
   for tt in golden {
     let digest = @sha1.Digest::new()
