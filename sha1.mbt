@@ -8,8 +8,7 @@
 // The size of a sha1 checksum in bytes.
 let size = 20
 
-// The blocksize of sha1 in bytes.
-///|
+///| The blocksize of sha1 in bytes.
 let block_size = 64
 
 ///|
@@ -74,7 +73,8 @@ fn sum(self : Digest) -> FixedArray[Byte] {
   let len = self.len << 3
   be_put_uint64(tmp, t, len) // append length in bits
   for i = 0; i < t + 8; i = i + 1 {
-    self.write_byte(tmp[i])
+    guard self.write_byte(tmp[i]) is None
+
   }
 
   // The previous write ensures that a whole number of
@@ -108,15 +108,17 @@ pub fn reset(self : Digest) -> Unit {
 let _trait : &@io.Writer = Digest::new()
 
 ///| `write` writes a slice of bytes to the digest.
-pub fn write(self : Digest, buf : @io.Slice[Byte]) -> (Int, @io.IOError?) {
+pub impl @io.Writer for Digest with write(self, buf) {
+  let mut count = 0
   for b in buf {
-    self.write_byte(b)
+    guard self.write_byte(b) is None else { break }
+    count += 1
   }
-  (buf.length(), None)
+  (count, None)
 }
 
 ///| `write_byte` writes a byte to the digest.
-pub fn write_byte(self : Digest, b : Byte) -> Unit {
+pub impl @io.ByteWriter for Digest with write_byte(self, b) {
   self.len += 1
   self.x[self.nx] = b
   self.nx += 1
@@ -124,6 +126,7 @@ pub fn write_byte(self : Digest, b : Byte) -> Unit {
     self.block_generic()
     self.nx = 0
   }
+  None
 }
 
 ///|

@@ -1,7 +1,5 @@
 package gmlewis/sha1
 
-alias @gmlewis/io as @io
-
 // Values
 
 // Types and methods
@@ -10,9 +8,9 @@ impl Digest {
   check_sum(Self) -> String
   new() -> Self
   reset(Self) -> Unit
-  write(Self, @io.Slice[Byte]) -> (Int, @io.IOError?)
-  write_byte(Self, Byte) -> Unit
 }
+impl @gmlewis/io.ByteWriter for Digest
+impl @gmlewis/io.Writer for Digest
 
 // Type aliases
 
