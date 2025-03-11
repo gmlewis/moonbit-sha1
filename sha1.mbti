@@ -1,6 +1,9 @@
 package gmlewis/sha1
 
 // Values
+fn check_sum(Digest) -> String
+
+fn reset(Digest) -> Unit
 
 // Types and methods
 type Digest
