@@ -1,4 +1,4 @@
-package gmlewis/sha1
+package "gmlewis/sha1"
 
 // Values
 fn check_sum(Digest) -> String
