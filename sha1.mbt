@@ -1,4 +1,5 @@
-///| This package is based on the Go implementation found here:
+///|
+/// This package is based on the Go implementation found here:
 /// https://cs.opensource.google/go/go/+/refs/tags/go1.23.0:src/crypto/sha1/sha1.go
 /// which has the copyright notice:
 /// Copyright 2009 The Go Authors. All rights reserved.
@@ -8,7 +9,8 @@
 // The size of a sha1 checksum in bytes.
 let size = 20
 
-///| The blocksize of sha1 in bytes.
+///|
+/// The blocksize of sha1 in bytes.
 let block_size = 64
 
 ///|
@@ -29,7 +31,8 @@ let init3 = 0x10325476U
 ///|
 let init4 = 0xC3D2E1F0U
 
-///| `Digest` represents the partial evaluation of a checksum.
+///|
+/// `Digest` represents the partial evaluation of a checksum.
 struct Digest {
   h : FixedArray[UInt] // 5
   x : FixedArray[Byte] // chunk
@@ -37,7 +40,8 @@ struct Digest {
   mut len : UInt64
 }
 
-///| `Digest::new` returns a new, reset Digest, ready to sum.
+///|
+/// `Digest::new` returns a new, reset Digest, ready to sum.
 pub fn Digest::new() -> Digest {
   {
     h: FixedArray::from_array([init0, init1, init2, init3, init4]),
@@ -47,7 +51,8 @@ pub fn Digest::new() -> Digest {
   }
 }
 
-///| `check_sum` returns the final sha1sum as a hex string.
+///|
+/// `check_sum` returns the final sha1sum as a hex string.
 pub fn check_sum(self : Digest) -> String {
   let digest = self.sum()
   let result = @buffer.new(size_hint=2 * size)
@@ -58,7 +63,8 @@ pub fn check_sum(self : Digest) -> String {
   result.contents().to_unchecked_string()
 }
 
-///| `sum` returns the final sha1sum as a `FixedArray[Byte]`.
+///|
+/// `sum` returns the final sha1sum as a `FixedArray[Byte]`.
 fn sum(self : Digest) -> FixedArray[Byte] {
   // Padding. Add a 1 bit and 0 bits until 56 bytes mod 64.
   let tmp = FixedArray::make(64 + 8, b'\x00')
@@ -93,7 +99,8 @@ fn sum(self : Digest) -> FixedArray[Byte] {
   digest
 }
 
-///| `reset` resets a digest for re-use.
+///|
+/// `reset` resets a digest for re-use.
 pub fn reset(self : Digest) -> Unit {
   self.h[0] = init0
   self.h[1] = init1
@@ -107,7 +114,8 @@ pub fn reset(self : Digest) -> Unit {
 ///|
 let _trait : &@io.Writer = Digest::new()
 
-///| `write` writes a slice of bytes to the digest.
+///|
+/// `write` writes a slice of bytes to the digest.
 pub impl @io.Writer for Digest with write(self, buf) {
   let mut count = 0
   for b in buf {
@@ -117,7 +125,8 @@ pub impl @io.Writer for Digest with write(self, buf) {
   (count, None)
 }
 
-///| `write_byte` writes a byte to the digest.
+///|
+/// `write_byte` writes a byte to the digest.
 pub impl @io.ByteWriter for Digest with write_byte(self, b) {
   self.len += 1
   self.x[self.nx] = b
