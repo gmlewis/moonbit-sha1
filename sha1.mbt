@@ -80,7 +80,6 @@ fn sum(self : Digest) -> FixedArray[Byte] {
   be_put_uint64(tmp, t, len) // append length in bits
   for i = 0; i < t + 8; i = i + 1 {
     guard self.write_byte(tmp[i]) is None
-
   }
 
   // The previous write ensures that a whole number of

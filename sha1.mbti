@@ -7,11 +7,9 @@ fn reset(Digest) -> Unit
 
 // Types and methods
 type Digest
-impl Digest {
-  check_sum(Self) -> String
-  new() -> Self
-  reset(Self) -> Unit
-}
+fn Digest::check_sum(Self) -> String
+fn Digest::new() -> Self
+fn Digest::reset(Self) -> Unit
 impl @gmlewis/io.ByteWriter for Digest
 impl @gmlewis/io.Writer for Digest
 
