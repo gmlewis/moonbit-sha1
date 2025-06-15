@@ -116,6 +116,6 @@ test "check_sum works properly" {
     let b = @io.Slice::new(tt.s.to_array())
     guard digest.write(b) is (_, None)
     let got = digest.check_sum()
-    assert_eq!(got, tt.out)
+    assert_eq(got, tt.out)
   }
 }
