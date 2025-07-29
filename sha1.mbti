@@ -3,6 +3,8 @@ package "gmlewis/sha1"
 
 // Values
 
+// Errors
+
 // Types and methods
 type Digest
 fn Digest::check_sum(Self) -> String
