@@ -1,6 +1,10 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "gmlewis/sha1"
 
+import(
+  "gmlewis/io"
+)
+
 // Values
 
 // Errors
@@ -10,8 +14,10 @@ type Digest
 fn Digest::check_sum(Self) -> String
 fn Digest::new() -> Self
 fn Digest::reset(Self) -> Unit
-impl @gmlewis/io.ByteWriter for Digest
-impl @gmlewis/io.Writer for Digest
+fn Digest::write(Self, @io.Slice[Byte]) -> (Int, @io.IOError?) // from trait `@io.Writer`
+fn Digest::write_byte(Self, Byte) -> @io.IOError? // from trait `@io.ByteWriter`
+impl @io.ByteWriter for Digest
+impl @io.Writer for Digest
 
 // Type aliases
 
