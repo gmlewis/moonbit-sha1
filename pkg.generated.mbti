@@ -14,8 +14,6 @@ type Digest
 fn Digest::check_sum(Self) -> String
 fn Digest::new() -> Self
 fn Digest::reset(Self) -> Unit
-fn Digest::write(Self, @io.Slice[Byte]) -> (Int, @io.IOError?) // from trait `@io.Writer`
-fn Digest::write_byte(Self, Byte) -> @io.IOError? // from trait `@io.ByteWriter`
 impl @io.ByteWriter for Digest
 impl @io.Writer for Digest
 
