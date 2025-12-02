@@ -11,11 +11,11 @@ import(
 
 // Types and methods
 type Digest
-fn Digest::check_sum(Self) -> String
-fn Digest::new() -> Self
-fn Digest::reset(Self) -> Unit
-impl @io.ByteWriter for Digest
-impl @io.Writer for Digest
+pub fn Digest::check_sum(Self) -> String
+pub fn Digest::new() -> Self
+pub fn Digest::reset(Self) -> Unit
+pub impl @io.ByteWriter for Digest
+pub impl @io.Writer for Digest
 
 // Type aliases
 
