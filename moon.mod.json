@@ -1,8 +1,8 @@
 {
   "name": "gmlewis/sha1",
-  "version": "0.11.27",
+  "version": "0.12.0",
   "deps": {
-    "gmlewis/io": "0.22.19"
+    "gmlewis/io": "0.23.0"
   },
   "readme": "README.md",
   "repository": "https://github.com/gmlewis/moonbit-sha1",
