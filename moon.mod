@@ -1,0 +1,17 @@
+name = "gmlewis/sha1"
+
+version = "0.12.8"
+
+import {
+  "gmlewis/io@0.23.11",
+}
+
+readme = "README.md"
+
+repository = "https://github.com/gmlewis/moonbit-sha1"
+
+license = "Apache-2.0"
+
+keywords = [ "sha1", "hash", "algorithm", "moonbit" ]
+
+description = "MoonBit sha1: provide simple sha1 hash algorithm."

@@ -55,10 +55,10 @@ pub fn Digest::new() -> Digest {
 /// `check_sum` returns the final sha1sum as a hex string.
 pub fn Digest::check_sum(self : Digest) -> String {
   let digest = self.sum()
-  let result = @buffer.new(size_hint=2 * size)
+  let result = Buffer(size_hint=2 * size)
   for b in digest {
-    result.write_char(to_hex((b.to_int() >> 4) & 0xf))
-    result.write_char(to_hex(b.to_int() & 0xf))
+    result.write_char_utf16le(to_hex((b.to_int() >> 4) & 0xf))
+    result.write_char_utf16le(to_hex(b.to_int() & 0xf))
   }
   result.contents().to_unchecked_string()
 }
@@ -115,7 +115,7 @@ let _trait : &@io.Writer = Digest::new()
 
 ///|
 /// `write` writes a slice of bytes to the digest.
-pub impl @io.Writer for Digest with write(self, buf) {
+pub impl @io.Writer for Digest with fn write(self, buf) {
   let mut count = 0
   for b in buf {
     guard self.write_byte(b) is None else { break }
@@ -126,7 +126,7 @@ pub impl @io.Writer for Digest with write(self, buf) {
 
 ///|
 /// `write_byte` writes a byte to the digest.
-pub impl @io.ByteWriter for Digest with write_byte(self, b) {
+pub impl @io.ByteWriter for Digest with fn write_byte(self, b) {
   self.len += 1
   self.x[self.nx] = b
   self.nx += 1
