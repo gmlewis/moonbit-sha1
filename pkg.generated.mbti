@@ -20,4 +20,3 @@ pub impl @io.Writer for Digest
 // Type aliases
 
 // Traits
-
