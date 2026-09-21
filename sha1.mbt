@@ -111,10 +111,10 @@ pub fn Digest::reset(self : Digest) -> Unit {
 }
 
 ///|
-extend Digest with @io.ByteWriter::{write_byte}
+pub extend Digest with @io.ByteWriter::{write_byte}
 
 ///|
-let _trait : &@io.Writer = Digest::new()
+pub extend Digest with @io.Writer::{write}
 
 ///|
 /// `write` writes a slice of bytes to the digest.
