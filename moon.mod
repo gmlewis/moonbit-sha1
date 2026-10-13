@@ -1,9 +1,9 @@
 name = "gmlewis/sha1"
 
-version = "0.12.15"
+version = "0.12.16"
 
 import {
-  "gmlewis/io@0.23.18",
+  "gmlewis/io@0.23.19",
 }
 
 readme = "README.md"
