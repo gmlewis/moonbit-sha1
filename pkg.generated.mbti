@@ -14,7 +14,7 @@ type Digest
 pub fn Digest::check_sum(Self) -> String
 pub fn Digest::new() -> Self
 pub fn Digest::reset(Self) -> Unit
-pub fn Digest::write(Self, @io.Slice[Byte]) -> (Int, @io.IOError?)
+pub fn Digest::write(Self, @io.Slice[Byte]) -> (Int32, @io.IOError?)
 pub fn Digest::write_byte(Self, Byte) -> @io.IOError?
 pub impl @io.ByteWriter for Digest
 pub impl @io.Writer for Digest
