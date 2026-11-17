@@ -55,7 +55,7 @@ pub fn Digest::new() -> Digest {
 /// `check_sum` returns the final sha1sum as a hex string.
 pub fn Digest::check_sum(self : Digest) -> String {
   let digest = self.sum()
-  let result = Buffer(size_hint=2 * size)
+  let result = Buffer(capacity=2 * size)
   for b in digest {
     result.write_char_utf16le(to_hex((b.to_int() >> 4) & 0xf))
     result.write_char_utf16le(to_hex(b.to_int() & 0xf))
